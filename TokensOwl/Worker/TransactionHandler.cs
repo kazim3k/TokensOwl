@@ -80,10 +80,12 @@ namespace TokensOwl.Worker
                     transactionToCash.Address, transactionToCash.FromAddress, transactionToCash.Value,
                     transactionToCash.TokenSymbol, transactionToCash.TokenDecimal, transactionToCash.TimeStamp, transactionToCash.ContractAddress);
                 this.telegramClient.SendNotification(telegramTransaction);
+                this.logger.LogInformation(
+                    $"Successfully pushed notification, address: {transactionToCash.Address}, Name: {telegramTransaction.Name}");
             }
             catch (Exception e)
             {
-                this.logger.LogError($"Something went wrong during while handling address: {address}");
+                this.logger.LogError($"Something went wrong during while handling address: {address}, Message: {e.Message}");
             }
         }
     }
