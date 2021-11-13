@@ -1,6 +1,8 @@
 name: Daily action
 
-on: push
+on:
+  schedule:
+    - cron:  '*/5 * * * *'
 
 jobs:
   build-and-run-daily-job:
