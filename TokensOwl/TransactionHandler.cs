@@ -8,7 +8,7 @@ using TokensOwl.Exceptions;
 using TokensOwl.Infrastructure;
 using TokensOwl.Infrastructure.Models;
 
-namespace TokensOwl.Worker
+namespace TokensOwl
 {
     public class TransactionHandler : ITransactionHandler
     {
@@ -52,6 +52,7 @@ namespace TokensOwl.Worker
                 var etherscanTransaction = etherscanTransactionResponse.Result.First();
 
                 var transactionToCash = new CashedTransaction(
+                    name,
                     address,
                     etherscanTransaction.Hash,
                     etherscanTransaction.BlockNumber,

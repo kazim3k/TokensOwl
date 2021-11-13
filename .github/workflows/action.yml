@@ -1,0 +1,28 @@
+name: Daily action
+
+on: push
+
+jobs:
+  build-and-run-daily-job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Git - Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup .Net Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      - name: Solution - Build
+        run: dotnet build --configuration Release
+        working-directory: ./TokensOwl
+
+      - name: Run action
+        env:
+          DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
+          ETHER_SCAN_API_KEY: ${{ secrets.ETHER_SCAN_API_KEY }}
+          GET_USD_RATE_API_KEY: ${{ secrets.GET_USD_RATE_API_KEY }}
+          TELEGRAM_API_KEY: ${{ secrets.TELEGRAM_API_KEY }}
+        run: dotnet run
+        working-directory: ./TokensOwl

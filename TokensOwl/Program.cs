@@ -5,7 +5,6 @@ using Microsoft.Extensions.Hosting;
 using TokensOwl.Clients.Etherscan;
 using TokensOwl.Clients.Telegram;
 using TokensOwl.Infrastructure;
-using TokensOwl.Worker;
 
 namespace TokensOwl
 {
@@ -13,16 +12,17 @@ namespace TokensOwl
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var consoleApp = CreateHostBuilder(args).Build().Services.GetRequiredService<ConsoleApp>();
+
+            consoleApp?.Execute();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
+                .ConfigureServices(services =>
                 {
-                    services.AddHostedService<Worker.Worker>();
+                    services.AddSingleton<ConsoleApp>();
                     var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING") ?? "";
-
                     services.AddDbContext<TransactionsDbContext>(
                         options => options.UseNpgsql(connectionString)
                             .UseSnakeCaseNamingConvention());

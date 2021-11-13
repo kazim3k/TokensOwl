@@ -40,7 +40,7 @@ namespace TokensOwl.Clients.Telegram
             var text =
                 $"*Wallet notification*%0A%0A_Data_: {telegramTransactionModel.Date}%0A_Użytkownik_: *{telegramTransactionModel.Name}*%0A{telegramTransactionModel.ValuePositivityToken}{telegramTransactionModel.Value} {telegramTransactionModel.TokenSymbol} \\({usdValueString}\\)%0A[view on Etherscan](https://etherscan.io/tx/{telegramTransactionModel.Hash}/)";
             var requestMichal = new HttpRequestMessage(HttpMethod.Get,
-                $"https://api.telegram.org/bot{this.apiKey}/sendMessage?disable_web_page_preview=true&chat_id={ChatIdMichal}&parse_mode=MarkdownV2&text={text}");
+                $"https://api.telegram.org/bot{this.apiKey}/sendMessage?disable_notification=false&disable_web_page_preview=true&chat_id={ChatIdMichal}&parse_mode=MarkdownV2&text={text}");
 
             var requestBartek = new HttpRequestMessage(HttpMethod.Get,
                 $"https://api.telegram.org/bot{this.apiKey}/sendMessage?disable_web_page_preview=true&chat_id={ChatIdBartek}&parse_mode=MarkdownV2&text={text}");

@@ -1,4 +1,4 @@
-namespace TokensOwl.Worker
+namespace TokensOwl
 {
     public interface ITransactionHandler
     {

@@ -2,11 +2,12 @@ namespace TokensOwl.Infrastructure.Models
 {
     public class CashedTransaction
     {
-        public CashedTransaction(string address, string hash, string blockNumber, string timeStamp, string nonce, string blockHash,
+        public CashedTransaction(string name, string address, string hash, string blockNumber, string timeStamp, string nonce, string blockHash,
             string fromAddress, string contractAddress, string toAddress, string value, string tokenName, string tokenSymbol,
             string tokenDecimal, string transactionIndex, string gas, string gasPrice, string gasUsed,
             string cumulativeGasUsed, string input, string confirmations)
         {
+            this.Name = name;
             this.Address = address;
             this.Hash = hash;
             this.BlockNumber = blockNumber;
@@ -28,7 +29,7 @@ namespace TokensOwl.Infrastructure.Models
             this.Input = input;
             this.Confirmations = confirmations;
         }
-
+        public string Name { get; private set; }
         public string Address { get; private set; }
         public string Hash { get; private set; }
         public string BlockNumber { get; private set; }
